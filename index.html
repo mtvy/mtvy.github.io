@@ -1,13 +1,88 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Mtvy</title>
+        <meta charset="utf-8"> 
+        <style>
+            
+            
+           
+            
+            
+            .note {
+                font-size: 0.75em;
+                position: relative;
+                top: -4px;
+            }
+            p {
+                margin-bottom: -4px;
+            }
+            
+        </style>
+        <script>
+            let i = 0;
+            let txt = 'MTVY.'; 
+            let speed = 69;
+
+            let i_info = 0;
+            let info = "Новая информация... Скоро..."
+            let speed_info = 500;
+    
+            function typeWriter() {
+                if (i < txt.length) {
+                    document.getElementById("logo").innerHTML += txt.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+                if (i_info < info.length) {
+                    document.getElementById("soon_info").innerHTML += info.charAt(i_info);
+                    i_info++;
+                    setTimeout(typeWriter, speed_info);
+                }
+            }
+        </script>
+    </head>
+    <head>
         <link rel="stylesheet" href="css/style.css">
     </head>
+    
+    <body onload="typeWriter()">
+        <header class="header"> <div id="logo"></div> </header>
 
-    <body>
-        <div class="header">
-            <img src="img/logo.jpg" alt="">
-          </div>
+        <div id="all">
+
+            <div id="links">
+                <a href="https://t.me/mtvyp" style="margin-top: 0;">Telegram</a>
+                <a href="https://github.com/mtvy">GitHub</a>
+                <a href="https://twitter.com/mtvy_">Twitter</a>
+                <a href="cv.pdf">Резюме</a>
+            </div>
+            
+            <div id="content">
+            
+                <p> Привет, меня зовут Матвей Прудников.</p>
+
+                <p>Я инженер-программист из Москвы занимаюсь 
+                    <span title="Machine Learning: решение поставленных задач с помощью машинного обучения" class="info">ML</span>
+                    и разработкой как низкоуровневых, так и высокоуровневых приложений.
+                </p>
+                
+                <p>В основном я пишу код на C, C++, Python, JavaScript. Также применяю большое количество других языков 
+                   включая Go, Java, Bash, языки для программирования смарт-контрактов (Solidity, Fift, FunC), 
+                   MQL5 для торговых ботов и многие другие.
+                </p>
+                
+                <p>Помимо разработки увлекаюсь финансовыми рынками и 
+                   криптовалютой как телхнологией для решения многих проблем в современной экономике.
+                </p>
+                
+                <i><p id="soon_info" class="comment_line">  </p></i>
+                
+                <p clas="comment_line"> <i>Последнее обновление 4 Сентября, 2022.</i></p>
+            
+            </div>
+            
+        </div>
     </body>
 
 </html>
