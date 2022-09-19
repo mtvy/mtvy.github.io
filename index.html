@@ -2,71 +2,33 @@
 <html>
     <head>
         <title>Mtvy</title>
-        <meta charset="utf-8"> 
-        <script>
-            let i = 0;
-            let txt = 'MTVY.'; 
-            let speed = 69;
-
-            let i_info = 0;
-            let info = "Новая информация... Скоро..."
-            let speed_info = 500;
-    
-            function typeWriter() {
-                if (i < txt.length) {
-                    document.getElementById("logo").innerHTML += txt.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, speed);
-                }
-                if (i_info < info.length) {
-                    document.getElementById("soon_info").innerHTML += info.charAt(i_info);
-                    i_info++;
-                    setTimeout(typeWriter, speed_info);
-                }
-            }
-        </script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        
     </head>
     <head>
         <link rel="stylesheet" href="css/style.css">
     </head>
     
-    <body onload="typeWriter()">
-        <header class="header"> <div id="logo"></div> </header>
+    <body id="rev_color">
+        <header> <div id="logo"></div> </header>
 
-        <div id="all">
-
-            <div id="links">
-                <a href="https://t.me/mtvyp" style="margin-top: 0;">Telegram</a>
-                <a href="https://github.com/mtvy">GitHub</a>
-                <a href="https://twitter.com/mtvy_">Twitter</a>
-                <a href="cv.pdf">Резюме</a>
-            </div>
-            
-            <div id="content">
-            
-                <p> Привет, меня зовут Матвей Прудников.</p>
-
-                <p>Я инженер-программист из Москвы занимаюсь 
-                    <span title="Machine Learning: решение поставленных задач с помощью машинного обучения" class="info">ML</span>
-                    и разработкой как низкоуровневых, так и высокоуровневых приложений.
-                </p>
-                
-                <p>В основном я пишу код на C, C++, Python, JavaScript. Также применяю большое количество других языков 
-                   включая Go, Java, Bash, языки для программирования смарт-контрактов (Solidity, Fift, FunC), 
-                   MQL5 для торговых ботов и многие другие.
-                </p>
-                
-                <p>Помимо разработки увлекаюсь финансовыми рынками и 
-                   криптовалютой как технологией для решения многих проблем в современной экономике.
-                </p>
-                
-                <i><p id="soon_info" class="comment_line">  </p></i>
-                
-                <p class="comment_line"> <i>Последнее обновление 4 Сентября, 2022.</i></p>
-            
-            </div>
-            
+        <div id="links">
+            <a class="link" href="https://t.me/mtvyp" style="margin-top: 0;">Telegram</a>
+            <a class="link" href="https://github.com/mtvy">GitHub</a>
+            <a class="link" href="https://twitter.com/mtvy_">Twitter</a>
+            <div class="btn-group dropend link">
+                <a class="drop-title" type="button" data-bs-toggle="dropdown" aria-expanded="false">CV</a>
+                <ul class="dropdown-menu cv-menu">
+                    <li><a class="dropdown-item cv-item" href="cv_en.pdf">English</a></li>
+                    <li><a class="dropdown-item cv-item" href="cv.pdf">Русский</a></li>
+                </ul>
+              </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+        <script src="js/index.js"></script>
     </body>
+
 
 </html>
