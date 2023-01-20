@@ -67,9 +67,9 @@ async function makeObjects() {
     spherePoints = THREE.GeometryUtils.randomPointsInGeometry(sphere, particleColor);
     console.log("2")
     
-    var box = new THREE.BoxGeometry(12, 12, 12);
+    //var box = new THREE.BoxGeometry(12, 12, 12);
     
-    cubePoints = THREE.GeometryUtils.randomPointsInGeometry(box, particleColor);
+    //cubePoints = THREE.GeometryUtils.randomPointsInGeometry(box, particleColor);
     console.log("3")
     for (var p = 0; p < particleCount; p++){
         var vertex = new THREE.Vector3();
@@ -81,7 +81,7 @@ async function makeObjects() {
     }
     
     createVertices(sphereParticles, spherePoints, null, null);
-    createVertices(cubeParticles, cubePoints, null, 1);
+    //createVertices(cubeParticles, cubePoints, null, 1);
     
     function createVertices(emptyArray, points, yOffset = 0, trigger = null){
         for (var p = 0; p < particleCount; p++){
@@ -165,7 +165,7 @@ async function makeObjects() {
     }
 
     triggers[0].addEventListener('click', toSphere);
-    triggers[1].addEventListener('click', toCube);
+    //triggers[1].addEventListener('click', toCube);
 
     function handleTriggers(disable){
         for (var x = 0; x < triggers.length; x++){
