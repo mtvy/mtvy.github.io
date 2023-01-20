@@ -181,6 +181,6 @@ async function makeObjects() {
 typeWriter("logo", 0, "MTVY.", 69).then(
     setTimeout(function() {
         makeObjects().then(document.getElementById("links").style.opacity = 1
-    )}, 1000)
+    )}, 500)
 );
 
