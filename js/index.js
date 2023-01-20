@@ -35,26 +35,26 @@ async function makeObjects() {
     }
 
     window.addEventListener('resize', fullScreen, false);
-    console.log("2")
     var scene = new THREE.Scene();
-
+    
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-
+    
     camera.position.y = 23;
     camera.position.z = 26;
-
+    
     var controls = new THREE.OrbitControls(camera);
-    controls.update();
-
+    
+    console.log("2")
     var particleCount = numberOfParticles;
-
+    
     var spherePoints,
-        cubePoints;
-
+    cubePoints;
+    
     var particles = new THREE.Geometry(),
-        sphereParticles = new THREE.Geometry(),
-        cubeParticles = new THREE.Geometry();
-
+    sphereParticles = new THREE.Geometry(),
+    cubeParticles = new THREE.Geometry();
+    
+    controls.update();
     var pMaterial = new THREE.PointCloudMaterial({
         color: particleColor,
         size: particleSize,
