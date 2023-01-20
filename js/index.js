@@ -44,7 +44,6 @@ async function makeObjects() {
     
     var controls = new THREE.OrbitControls(camera);
     
-    console.log("2")
     var particleCount = numberOfParticles;
     
     var spherePoints,
@@ -62,12 +61,13 @@ async function makeObjects() {
         blending: THREE.AdditiveBlending,
         transparent: true
     });
-
+    
+    console.log("2")
     var geometry = new THREE.SphereGeometry(5, 40, 40);
-
+    
     spherePoints = THREE.GeometryUtils.randomPointsInGeometry(geometry, particleColor);
     var geometry = new THREE.BoxGeometry(12, 12, 12);
-
+    
     cubePoints = THREE.GeometryUtils.randomPointsInGeometry(geometry, particleColor);
     console.log("3")
     for (var p = 0; p < particleCount; p++){
@@ -75,40 +75,40 @@ async function makeObjects() {
         vertex.x = 0;
         vertex.y = 0;
         vertex.z = 0;
-
+        
         particles.vertices.push(vertex);
     }
-
+    
     createVertices(sphereParticles, spherePoints, null, null);
     createVertices(cubeParticles, cubePoints, null, 1);
-
+    
     function createVertices(emptyArray, points, yOffset = 0, trigger = null){
         for (var p = 0; p < particleCount; p++){
             var vertex = new THREE.Vector3();
             vertex.x = points[p]['x'];
             vertex.y = points[p]['y'] - yOffset;
             vertex.z = points[p]['z'];
-
+            
             emptyArray.vertices.push(vertex);
         }
-
+        
         if (trigger !== null){
             triggers[trigger].setAttribute('data-disabled', false);
         }
         
     }
-
+    
     var particleSystem = new THREE.PointCloud(
         particles,
         pMaterial
-    );
-
-    particleSystem.sortParticles = true;
-
-    scene.add(particleSystem);
-
-    const normalSpeed = (defaultAnimationSpeed/100),
-          fullSpeed = (morphAnimationSpeed/100);
+        );
+        
+        particleSystem.sortParticles = true;
+        
+        scene.add(particleSystem);
+        
+        const normalSpeed = (defaultAnimationSpeed/100),
+        fullSpeed = (morphAnimationSpeed/100);
 
     let animationVars = {
         speed: normalSpeed
