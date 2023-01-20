@@ -31,13 +31,27 @@ body {
     display: inline-block;
     font-size: 14px;
     margin: 0 20px;
-    padding: 2px 4px;
+    padding: 0 4px;
     transition: all 1s;
     font-size: 32px;
     color: rgba(255, 255, 255, 0.28);
     font-weight: 500;
   }
   .link:hover {
+    color: rgba(255, 255, 255, 0.807);
+  }
+  .cv  {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 20px 10px;
+    padding: 0 4px;
+    transition: all 1s;
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.28);
+    font-weight: 500;
+  }
+  .cv:hover {
     color: rgba(255, 255, 255, 0.807);
   }
 
@@ -53,7 +67,6 @@ body {
     color: rgba(255, 255, 255, 0.807);
   }
   .drop-title {
-    margin: 0 0 18px 0;
     background-color: rgba(0, 0, 0, 0);
     color: rgba(255, 255, 255, 0.28);
   }
