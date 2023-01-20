@@ -54,6 +54,7 @@ body {
   }
   .drop-title {
     margin: 0 0 18px 0;
+    background-color: rgba(0, 0, 0, 0);
     color: rgba(255, 255, 255, 0.28);
   }
   .drop-title:hover {
