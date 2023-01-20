@@ -62,13 +62,14 @@ async function makeObjects() {
         transparent: true
     });
     
+    var sphere = new THREE.SphereGeometry(5, 40, 40);
+    
+    spherePoints = THREE.GeometryUtils.randomPointsInGeometry(sphere, particleColor);
     console.log("2")
-    var geometry = new THREE.SphereGeometry(5, 40, 40);
     
-    spherePoints = THREE.GeometryUtils.randomPointsInGeometry(geometry, particleColor);
-    var geometry = new THREE.BoxGeometry(12, 12, 12);
+    var box = new THREE.BoxGeometry(12, 12, 12);
     
-    cubePoints = THREE.GeometryUtils.randomPointsInGeometry(geometry, particleColor);
+    cubePoints = THREE.GeometryUtils.randomPointsInGeometry(box, particleColor);
     console.log("3")
     for (var p = 0; p < particleCount; p++){
         var vertex = new THREE.Vector3();
