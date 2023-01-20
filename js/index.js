@@ -9,7 +9,7 @@ async function typeWriter(name, char_ind, txt, delay) {
 
 async function makeObjects() {
     const numberOfParticles = 6000;
-    console.log("1")
+    
     const particleImage = 'https://motionarray.imgix.net/preview-34649aJ93evd9dG_0008.jpg?w=660&q=60&fit=max&auto=format',
           particleColor = '0xFFFFFF',
           particleSize  = 0.2;
@@ -46,8 +46,8 @@ async function makeObjects() {
     
     var particleCount = numberOfParticles;
     
-    var spherePoints,
-    cubePoints;
+    //var spherePoints,
+    //    cubePoints;
     
     var particles = new THREE.Geometry(),
     sphereParticles = new THREE.Geometry(),
@@ -62,15 +62,12 @@ async function makeObjects() {
         transparent: true
     });
     
-    var sphere = new THREE.SphereGeometry(5, 40, 40);
-    
-    spherePoints = THREE.GeometryUtils.randomPointsInGeometry(sphere, particleColor);
-    console.log("2")
+    //var sphere = new THREE.SphereGeometry(5, 40, 40);
+    //spherePoints = THREE.GeometryUtils.randomPointsInGeometry(sphere, particleColor);
     
     //var box = new THREE.BoxGeometry(12, 12, 12);
-    
     //cubePoints = THREE.GeometryUtils.randomPointsInGeometry(box, particleColor);
-    console.log("3")
+    
     for (var p = 0; p < particleCount; p++){
         var vertex = new THREE.Vector3();
         vertex.x = 0;
@@ -79,19 +76,22 @@ async function makeObjects() {
         
         particles.vertices.push(vertex);
     }
+        
     
-    createVertices(sphereParticles, spherePoints, null, null);
-    //createVertices(cubeParticles, cubePoints, null, 1);
+    createVertices(sphereParticles, sphere, null, null);
+    createVertices(cubeParticles, cube, null, 1);
     
     function createVertices(emptyArray, points, yOffset = 0, trigger = null){
+        //let buff = [];
         for (var p = 0; p < particleCount; p++){
             var vertex = new THREE.Vector3();
             vertex.x = points[p]['x'];
             vertex.y = points[p]['y'] - yOffset;
             vertex.z = points[p]['z'];
-            
+            //buff.push({'x': vertex.x, 'y': vertex.y, 'z': vertex.z});
             emptyArray.vertices.push(vertex);
         }
+        //
         
         if (trigger !== null){
             triggers[trigger].setAttribute('data-disabled', false);
@@ -124,7 +124,7 @@ async function makeObjects() {
         window.requestAnimationFrame(animate);
         renderer.render(scene, camera);
     }
-    console.log("4")
+    
     animate();
     toSphere();
 
@@ -165,7 +165,7 @@ async function makeObjects() {
     }
 
     triggers[0].addEventListener('click', toSphere);
-    //triggers[1].addEventListener('click', toCube);
+    triggers[1].addEventListener('click', toCube);
 
     function handleTriggers(disable){
         for (var x = 0; x < triggers.length; x++){
