@@ -1,34 +1,46 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Mtvy</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        
-    </head>
-    <head>
-        <link rel="stylesheet" href="css/style.css">
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:700"> 
+    <link rel="stylesheet" href="css/style.css">
+    <title>Mtvy</title>
+</head>
     
-    <body id="rev_color">
-        <header> <div id="logo"></div> </header>
+<body id="rev_color">
+    <header> <div id="logo"></div> </header>
 
-        <div id="links">
-            <a class="link" href="https://t.me/mtvyp" style="margin-top: 0;">Telegram</a>
-            <a class="link" href="https://github.com/mtvy">GitHub</a>
-            <a class="link" href="https://twitter.com/mtvy_">Twitter</a>
-            <div class="btn-group dropend link">
-                <a class="drop-title" type="button" data-bs-toggle="dropdown" aria-expanded="false">CV</a>
-                <ul class="dropdown-menu cv-menu">
-                    <li><a class="dropdown-item cv-item" href="cv/cv_hh_en.pdf">English</a></li>
-                    <li><a class="dropdown-item cv-item" href="cv/cv_hh_ru.pdf">Русский</a></li>
-                </ul>
-              </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-        <script src="js/index.js"></script>
-    </body>
+    <div id="links">
+        <a class="link" href="https://t.me/mtvyp" target="_blank" style="margin-top: 0;">Telegram</a>
+        <a class="link" href="https://github.com/mtvy" target="_blank">GitHub</a>
+        <a class="link" href="https://twitter.com/mtvy_" target="_blank">Twitter</a>
+        <div class="btn-group dropend link">
+            <a class="drop-title" type="button" data-bs-toggle="dropdown" aria-expanded="false">CV</a>
+            <ul class="dropdown-menu cv-menu">
+                <li><a class="dropdown-item cv-item" href="cv/cv_hh_en.pdf" target="_blank">English</a></li>
+                <li><a class="dropdown-item cv-item" href="cv/cv_hh_ru.pdf" target="_blank">Русский</a></li>
+            </ul>
+          </div>
+    </div>
+    <div class="triggers">
+        <span data-disabled="true">Sphere</span>
+        <span data-disabled="true">Cube</span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js'></script>
+    <script src='https://s.cdpn.io/605067/OrbitControls.js'></script>
+    <script src='https://s.cdpn.io/605067/GeometryUtils.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
+    <script src='https://s.cdpn.io/605067/OBJLoaderFaces.js'></script>
+    <script src='https://s.cdpn.io/605067/stats.js'></script>
+    
+    <script src="js/index.js"></script>
+</body>
 
 
 </html>
