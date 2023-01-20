@@ -9,7 +9,7 @@ async function typeWriter(name, char_ind, txt, delay) {
 
 async function makeObjects() {
     const numberOfParticles = 6000;
-
+    console.log("1")
     const particleImage = 'https://motionarray.imgix.net/preview-34649aJ93evd9dG_0008.jpg?w=660&q=60&fit=max&auto=format',
           particleColor = '0xFFFFFF',
           particleSize  = 0.2;
@@ -35,7 +35,7 @@ async function makeObjects() {
     }
 
     window.addEventListener('resize', fullScreen, false);
-
+    console.log("2")
     var scene = new THREE.Scene();
 
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
@@ -69,7 +69,7 @@ async function makeObjects() {
     var geometry = new THREE.BoxGeometry(12, 12, 12);
 
     cubePoints = THREE.GeometryUtils.randomPointsInGeometry(geometry, particleColor);
-
+    console.log("3")
     for (var p = 0; p < particleCount; p++){
         var vertex = new THREE.Vector3();
         vertex.x = 0;
@@ -123,7 +123,7 @@ async function makeObjects() {
         window.requestAnimationFrame(animate);
         renderer.render(scene, camera);
     }
-
+    console.log("4")
     animate();
     toSphere();
 
@@ -178,9 +178,9 @@ async function makeObjects() {
 }
 
 
-typeWriter("logo", 0, "MTVY.", 69).then(
+makeObjects().then(
     setTimeout(function() {
-        makeObjects().then(document.getElementById("links").style.opacity = 1
+        typeWriter("logo", 0, "MTVY.", 69).then(document.getElementById("links").style.opacity = 1
     )}, 500)
 );
 
