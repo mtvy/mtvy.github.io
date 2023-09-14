@@ -107,3 +107,7 @@ span[data-disabled="true"]{
 span:hover{
     color: rgba(255, 255, 255, 0.28);
 }
+
+img {
+  filter: sepia(100%) saturate(20%);
+}
