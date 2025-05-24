@@ -11,7 +11,7 @@ async function makeObjects() {
     const numberOfParticles = 6000;
     
     const particleImage = 'https://avatars.githubusercontent.com/u/44533918?v=4',
-          particleColor = '0xFFFFFF',
+          particleColor = 'black',
           particleSize  = 0.2;
 
     const defaultAnimationSpeed = 1,
@@ -54,7 +54,7 @@ async function makeObjects() {
     cubeParticles = new THREE.Geometry();
     
     controls.update();
-    var pMaterial = new THREE.PointCloudMaterial({
+    var pMaterial = new THREE.PointsMaterial({
         color: particleColor,
         size: particleSize,
         map: THREE.ImageUtils.loadTexture(particleImage),
@@ -99,7 +99,7 @@ async function makeObjects() {
         
     }
     
-    var particleSystem = new THREE.PointCloud(
+    var particleSystem = new THREE.Points(
         particles,
         pMaterial
         );
