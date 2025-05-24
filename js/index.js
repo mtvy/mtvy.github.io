@@ -10,7 +10,7 @@ async function typeWriter(name, char_ind, txt, delay) {
 async function makeObjects() {
     const numberOfParticles = 6000;
     
-    const particleImage = 'https://demo-source.imgix.net/mountains.jpg',
+    const particleImage = 'https://avatars.githubusercontent.com/u/44533918?v=4',
           particleColor = '0xFFFFFF',
           particleSize  = 0.2;
 
