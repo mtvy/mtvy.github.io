@@ -1,187 +1,152 @@
+(() => {
+  const canvas = document.getElementById('scene');
 
-async function typeWriter(name, char_ind, txt, delay) {
-    if (char_ind < txt.length){
-        document.getElementById(name).innerHTML += txt.charAt(char_ind);
-        char_ind++;
-        setTimeout(typeWriter, delay, name, char_ind, txt, delay);
+  if (!canvas || typeof THREE === 'undefined') {
+    console.warn('3D background skipped: missing canvas or THREE.');
+    return;
+  }
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+  });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x030303, 0.018);
+
+  const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 18);
+
+  const ambient = new THREE.AmbientLight(0xfef9f1, 0.35);
+  scene.add(ambient);
+  const hemi = new THREE.HemisphereLight(0xd9b777, 0x050505, 0.6);
+  scene.add(hemi);
+
+  const particleGroup = new THREE.Group();
+  scene.add(particleGroup);
+
+  const particleCount = 6200;
+  const positions = new Float32Array(particleCount * 3);
+  const basePositions = new Float32Array(particleCount * 3);
+  const colors = new Float32Array(particleCount * 3);
+  const colorA = new THREE.Color(0xd9b777);
+  const colorB = new THREE.Color(0xb8844f);
+  const tmpColor = new THREE.Color();
+
+  for (let i = 0; i < particleCount; i += 1) {
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(2 * Math.random() - 1);
+    const radius = 6.5 + (Math.random() - 0.5) * 0.6;
+
+    const x = radius * Math.sin(phi) * Math.cos(theta);
+    const y = radius * Math.cos(phi);
+    const z = radius * Math.sin(phi) * Math.sin(theta);
+    const idx = i * 3;
+
+    positions[idx] = x;
+    positions[idx + 1] = y;
+    positions[idx + 2] = z;
+
+    basePositions[idx] = x;
+    basePositions[idx + 1] = y;
+    basePositions[idx + 2] = z;
+
+    tmpColor.copy(colorA).lerp(colorB, Math.random());
+    colors[idx] = tmpColor.r;
+    colors[idx + 1] = tmpColor.g;
+    colors[idx + 2] = tmpColor.b;
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const createParticleTexture = () => {
+    const size = 128;
+    const textureCanvas = document.createElement('canvas');
+    textureCanvas.width = textureCanvas.height = size;
+    const ctx = textureCanvas.getContext('2d');
+    const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    gradient.addColorStop(0, 'rgba(255,255,255,0.95)');
+    gradient.addColorStop(0.5, 'rgba(255,255,255,0.35)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+    const texture = new THREE.CanvasTexture(textureCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  };
+
+  const particleMaterial = new THREE.PointsMaterial({
+    size: 0.08,
+    map: createParticleTexture(),
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.95,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+    sizeAttenuation: true,
+  });
+
+  const spherePoints = new THREE.Points(geometry, particleMaterial);
+  particleGroup.add(spherePoints);
+
+  const clock = new THREE.Clock();
+  const motionQuery = typeof window.matchMedia === 'function'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : null;
+  let reduceMotion = motionQuery ? motionQuery.matches : false;
+
+  const handleMotionChange = (event) => {
+    reduceMotion = event.matches;
+  };
+
+  if (motionQuery) {
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener('change', handleMotionChange);
+    } else if (motionQuery.addListener) {
+      motionQuery.addListener(handleMotionChange);
     }
-}
+  }
 
-async function makeObjects() {
-    const numberOfParticles = 6000;
-    
-    const particleImage = 'https://avatars.githubusercontent.com/u/44533918?v=4',
-          particleColor = 'black',
-          particleSize  = 0.2;
+  const animate = () => {
+    if (!reduceMotion) {
+      const elapsed = clock.getElapsedTime();
+      const positionAttr = geometry.getAttribute('position');
+      const arr = positionAttr.array;
 
-    const defaultAnimationSpeed = 1,
-          morphAnimationSpeed   = 3;
+      for (let i = 0; i < particleCount; i += 1) {
+        const idx = i * 3;
+        const baseX = basePositions[idx];
+        const baseY = basePositions[idx + 1];
+        const baseZ = basePositions[idx + 2];
+        const swell = 1 + Math.sin(elapsed * 0.4 + i * 0.12) * 0.015;
 
-    const triggers = document.getElementsByClassName('triggers')[0].querySelectorAll('span');
+        arr[idx] = baseX * swell;
+        arr[idx + 1] = baseY * swell + Math.cos(elapsed * 0.6 + baseZ) * 0.02;
+        arr[idx + 2] = baseZ * swell;
+      }
 
-    var stats = new Stats();
-    stats.showPanel(0);
-
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    function fullScreen(){
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    window.addEventListener('resize', fullScreen, false);
-    var scene = new THREE.Scene();
-    
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-    
-    camera.position.y = 23;
-    camera.position.z = 26;
-    
-    var controls = new THREE.OrbitControls(camera);
-    
-    var particleCount = numberOfParticles;
-    
-    //var spherePoints,
-    //    cubePoints;
-    
-    var particles = new THREE.Geometry(),
-    sphereParticles = new THREE.Geometry(),
-    cubeParticles = new THREE.Geometry();
-    
-    controls.update();
-    var pMaterial = new THREE.PointsMaterial({
-        color: particleColor,
-        size: particleSize,
-        map: THREE.ImageUtils.loadTexture(particleImage),
-        blending: THREE.AdditiveBlending,
-        transparent: true
-    });
-    
-    //var sphere = new THREE.SphereGeometry(5, 40, 40);
-    //spherePoints = THREE.GeometryUtils.randomPointsInGeometry(sphere, particleColor);
-    
-    //var box = new THREE.BoxGeometry(12, 12, 12);
-    //cubePoints = THREE.GeometryUtils.randomPointsInGeometry(box, particleColor);
-    
-    for (var p = 0; p < particleCount; p++){
-        var vertex = new THREE.Vector3();
-        vertex.x = 0;
-        vertex.y = 0;
-        vertex.z = 0;
-        
-        particles.vertices.push(vertex);
-    }
-        
-    
-    createVertices(sphereParticles, sphere, null, null);
-    createVertices(cubeParticles, cube, null, 1);
-    
-    function createVertices(emptyArray, points, yOffset = 0, trigger = null){
-        //let buff = [];
-        for (var p = 0; p < particleCount; p++){
-            var vertex = new THREE.Vector3();
-            vertex.x = points[p]['x'];
-            vertex.y = points[p]['y'] - yOffset;
-            vertex.z = points[p]['z'];
-            //buff.push({'x': vertex.x, 'y': vertex.y, 'z': vertex.z});
-            emptyArray.vertices.push(vertex);
-        }
-        //
-        
-        if (trigger !== null){
-            triggers[trigger].setAttribute('data-disabled', false);
-        }
-        
-    }
-    
-    var particleSystem = new THREE.Points(
-        particles,
-        pMaterial
-        );
-        
-        particleSystem.sortParticles = true;
-        
-        scene.add(particleSystem);
-        
-        const normalSpeed = (defaultAnimationSpeed/100),
-        fullSpeed = (morphAnimationSpeed/100);
-
-    let animationVars = {
-        speed: normalSpeed
-    }
-
-    function animate(){
-        stats.begin();
-        particleSystem.rotation.y += animationVars.speed;
-        particles.verticesNeedUpdate = true;
-        stats.end();
-
-        window.requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-    }
-    
-    animate();
-    toSphere();
-
-    function toSphere(){
-        handleTriggers(0);
-        morphTo(sphereParticles);
-    }
-
-    function toCube(){
-        handleTriggers(1);
-        morphTo(cubeParticles);
+      positionAttr.needsUpdate = true;
+      particleGroup.rotation.y += 0.0006;
+      particleGroup.rotation.x = Math.sin(elapsed * 0.05) * 0.08;
     }
 
-    function morphTo(newParticles, color = '0xffffff'){
-        TweenMax.to(animationVars, 0.3, {
-            ease: Power4.easeIn,
-            speed: fullSpeed,
-            onComplete: slowDown
-        });
-        particleSystem.material.color.setHex(color);
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  };
 
-        for (var i = 0; i < particles.vertices.length; i++){
-            TweenMax.to(particles.vertices[i], 4, {
-                ease: Elastic.easeOut.config(1, 0.75),
-                x: newParticles.vertices[i].x,
-                y: newParticles.vertices[i].y,
-                z: newParticles.vertices[i].z
-            });
-        }
-    }
+  const onResize = () => {
+    const { innerWidth, innerHeight } = window;
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  };
 
-    function slowDown(){
-        TweenMax.to(animationVars, 4, {
-            ease: Power2.easeOut,
-            speed: normalSpeed,
-            delay: 1
-        });
-    }
-
-    triggers[0].addEventListener('click', toSphere);
-    triggers[1].addEventListener('click', toCube);
-
-    function handleTriggers(disable){
-        for (var x = 0; x < triggers.length; x++){
-            if (disable === x){
-                triggers[x].setAttribute('data-disabled', true);
-            } else {
-                triggers[x].setAttribute('data-disabled', false);
-            }
-        }
-    }
-}
-
-
-makeObjects().then(
-    setTimeout(function() {
-        typeWriter("logo", 0, "MTVY.", 69).then(document.getElementById("links").style.opacity = 1
-    )}, 500)
-);
-
+  window.addEventListener('resize', onResize);
+  animate();
+})();

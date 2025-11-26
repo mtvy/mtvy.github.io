@@ -4,60 +4,106 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:700"> 
-    <link rel="stylesheet" href="css/style.css">
-    
+
     <meta name="description" content="Mtvy's projects, community, and experience in software development.">
     <meta name="keywords" content="mtvy, software development, GitHub, Telegram, CV, go, golang, wooproger, Матвей, Прудников, mtvyp">
     <meta name="author" content="Mtvy">
-        
     <meta property="og:title" content="Mtvy - projects, community, cv">
     <meta property="og:description" content="Explore Mtvy's personal site to discover projects, community, and experience in software development.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mtvy.site"> 
+    <meta property="og:url" content="https://mtvy.site">
     <meta property="og:image" content="https://mtvy.site/images/mtvy.jpeg">
-        
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Mtvy - projects, community, cv">
     <meta name="twitter:description" content="Explore Mtvy's personal site to discover projects, skills, and experience in software development.">
-    <meta name="twitter:image" content="https://mtvy.site/images/mtvy.jpeg"> 
-        
-    <link rel="icon" type="image/ico" href="images/favicon.ico"> <!-- Укажите путь к вашему favicon -->
-    <title>Mtvy</title>
+    <meta name="twitter:image" content="https://mtvy.site/images/mtvy.jpeg">
+
+    <link rel="icon" type="image/ico" href="images/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Mtvy — signals & data</title>
 </head>
-    
-<body id="rev_color">
-    <header> <div id="logo"></div> </header>
+<body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="page-shell">
+        <header class="hero">
+            <p class="eyebrow">Mtvy / Software engineer</p>
+            <h1>MTVY.</h1>
+            <p class="lede">
+                Building reliable Go services, curating developer communities, and keeping the toolkit transparent.
+                Explore the data sources below for the latest CV, code, and channels.
+            </p>
+            <div class="cta-group">
+                <a class="button primary" href="cv/cv.pdf" target="_blank" rel="noopener">Open CV</a>
+                <a class="button ghost" href="https://t.me/mtvyp" target="_blank" rel="noopener">Ping in Telegram</a>
+            </div>
+        </header>
 
-    <div id="links">
-        <a class="link" href="https://t.me/mtvyp" target="_blank" style="margin-top: 0;">Telegram</a>
-        <a class="link" href="cv/cv.pdf" target="_blank">CV</a>
-        <a class="link" href="https://t.me/+RmTzOv5f6A45MTAy" target="_blank">Community</a>
-        <!-- <a class="link" href="https://devprod.tech/" target="_blank">Devprod</a> -->
-        <a class="link" href="https://github.com/mtvy" target="_blank">Github</a>
-    </div>
-    <div class="triggers">
-        <span data-disabled="true">Sphere</span>
-        <span data-disabled="true">Cube</span>
-        <br>
-        <br>
-        <span> <img src="https://profile-counter.glitch.me/mtvy-site/count.svg"/> </span>
+        <main class="grid">
+            <section class="data-section" id="data">
+                <div class="section-head">
+                    <p class="eyebrow">Data links</p>
+                    <h2>Source files & live channels</h2>
+                </div>
+                <div class="data-grid">
+                    <a class="data-card" href="https://t.me/mtvyp" target="_blank" rel="noopener">
+                        <p class="label">Direct line</p>
+                        <h3>Telegram DM</h3>
+                        <p>Quick questions, collaborations, or speaking invites.</p>
+                        <span>@mtvyp</span>
+                    </a>
+                    <a class="data-card" href="cv/cv.pdf" target="_blank" rel="noopener">
+                        <p class="label">CV</p>
+                        <h3>Current résumé</h3>
+                        <p>PDF snapshot with recent roles, stack, and highlights.</p>
+                        <span>Updated manually</span>
+                    </a>
+                    <a class="data-card" href="https://t.me/+RmTzOv5f6A45MTAy" target="_blank" rel="noopener">
+                        <p class="label">Community</p>
+                        <h3>Dev crew chat</h3>
+                        <p>Shared resources, recruiting signals, and release watch.</p>
+                        <span>Telegram channel</span>
+                    </a>
+                    <a class="data-card" href="https://github.com/mtvy" target="_blank" rel="noopener">
+                        <p class="label">GitHub</p>
+                        <h3>Repositories & experiments</h3>
+                        <p>Production Go services, OSS tinkering, and infra notes.</p>
+                        <span>github.com/mtvy</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- <section class="signal-section">
+                <div class="section-head">
+                    <p class="eyebrow">Telemetry</p>
+                    <h2>Activity pulses</h2>
+                </div>
+                <div class="signal-grid">
+                    <article class="signal-card">
+                        <h3>Production</h3>
+                        <p>Designing Go microservices with gRPC, PostgreSQL, and Kubernetes. Obsessed with pragmatic observability.</p>
+                    </article>
+                    <article class="signal-card">
+                        <h3>Community</h3>
+                        <p>Hosting weekly office hours in Telegram, sharing tooling recipes, and amplifying junior devs.</p>
+                    </article>
+                    <article class="signal-card">
+                        <h3>Experiments</h3>
+                        <p>3D web art, creative coding, and small productivity utilities explored after-hours.</p>
+                    </article>
+                </div>
+            </section> -->
+        </main>
+
+        <footer class="footer">
+            <p>© Mtvy · Crafted.</p>
+            <span><img src="https://profile-counter.glitch.me/mtvy-site/count.svg" alt="visitor counter"></span>
+        </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r83/three.js'></script>
-    <script src='https://s.cdpn.io/605067/OrbitControls.js'></script>
-    <script src='https://s.cdpn.io/605067/GeometryUtils.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js'></script>
-    <script src='https://s.cdpn.io/605067/OBJLoaderFaces.js'></script>
-    <script src='https://s.cdpn.io/605067/stats.js'></script>
-    
-    <script type="text/javascript" src="models/cube.js"></script>
-    <script type="text/javascript" src="models/sphere.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
     <script src="js/index.js"></script>
 </body>
-
-
 </html>
