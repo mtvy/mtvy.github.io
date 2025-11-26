@@ -29,48 +29,57 @@
     <canvas id="scene" aria-hidden="true"></canvas>
     <div class="page-shell">
         <header class="hero">
-            <p class="eyebrow">Mtvy / Software engineer</p>
+            <div class="hero-bar">
+                <p class="eyebrow" data-l10n="heroEyebrow">Mtvy / Software engineer</p>
+                <div class="lang-switch">
+                    <span data-l10n="langLabel">Language</span>
+                    <select id="lang-select" aria-label="Language selector">
+                        <option value="en">EN</option>
+                        <option value="ru">RU</option>
+                    </select>
+                </div>
+            </div>
             <h1>MTVY.</h1>
-            <p class="lede">
+            <p class="lede" data-l10n="heroLede">
                 Building reliable Go services, curating developer communities, and keeping the toolkit transparent.
                 Explore the data sources below for the latest CV, code, and channels.
             </p>
             <div class="cta-group">
-                <a class="button primary" href="cv/cv.pdf" target="_blank" rel="noopener">Open CV</a>
-                <a class="button ghost" href="https://t.me/mtvyp" target="_blank" rel="noopener">Ping in Telegram</a>
+                <a class="button primary" href="cv/cv.pdf" target="_blank" rel="noopener" data-l10n="ctaCv">Open CV</a>
+                <a class="button ghost" href="https://t.me/mtvyp" target="_blank" rel="noopener" data-l10n="ctaTelegram">Ping in Telegram</a>
             </div>
         </header>
 
         <main class="grid">
             <section class="data-section" id="data">
                 <div class="section-head">
-                    <p class="eyebrow">Data links</p>
-                    <h2>Source files & live channels</h2>
+                    <p class="eyebrow" data-l10n="dataSectionEyebrow">Data links</p>
+                    <h2 data-l10n="dataSectionTitle">Source files & live channels</h2>
                 </div>
                 <div class="data-grid">
                     <a class="data-card" href="https://t.me/mtvyp" target="_blank" rel="noopener">
-                        <p class="label">Direct line</p>
-                        <h3>Telegram DM</h3>
-                        <p>Quick questions, collaborations, or speaking invites.</p>
-                        <span>@mtvyp</span>
+                        <p class="label" data-l10n="cardDirectLabel">Direct line</p>
+                        <h3 data-l10n="cardDirectTitle">Telegram DM</h3>
+                        <p data-l10n="cardDirectBody">Quick questions, collaborations, or speaking invites.</p>
+                        <span data-l10n="cardDirectMeta">@mtvyp</span>
                     </a>
                     <a class="data-card" href="cv/cv.pdf" target="_blank" rel="noopener">
-                        <p class="label">CV</p>
-                        <h3>Current résumé</h3>
-                        <p>PDF snapshot with recent roles, stack, and highlights.</p>
-                        <span>Updated manually</span>
+                        <p class="label" data-l10n="cardCvLabel">CV</p>
+                        <h3 data-l10n="cardCvTitle">Current résumé</h3>
+                        <p data-l10n="cardCvBody">PDF snapshot with recent roles, stack, and highlights.</p>
+                        <span data-l10n="cardCvMeta">Updated manually</span>
                     </a>
                     <a class="data-card" href="https://t.me/+RmTzOv5f6A45MTAy" target="_blank" rel="noopener">
-                        <p class="label">Community</p>
-                        <h3>Dev crew chat</h3>
-                        <p>Shared resources, recruiting signals, and release watch.</p>
-                        <span>Telegram channel</span>
+                        <p class="label" data-l10n="cardCommunityLabel">Community</p>
+                        <h3 data-l10n="cardCommunityTitle">Dev crew chat</h3>
+                        <p data-l10n="cardCommunityBody">Shared resources, recruiting signals, and release watch.</p>
+                        <span data-l10n="cardCommunityMeta">Telegram channel</span>
                     </a>
                     <a class="data-card" href="https://github.com/mtvy" target="_blank" rel="noopener">
-                        <p class="label">GitHub</p>
-                        <h3>Repositories & experiments</h3>
-                        <p>Production Go services, OSS tinkering, and infra notes.</p>
-                        <span>github.com/mtvy</span>
+                        <p class="label" data-l10n="cardGithubLabel">GitHub</p>
+                        <h3 data-l10n="cardGithubTitle">Repositories & experiments</h3>
+                        <p data-l10n="cardGithubBody">Production Go services, OSS tinkering, and infra notes.</p>
+                        <span data-l10n="cardGithubMeta">github.com/mtvy</span>
                     </a>
                 </div>
             </section>
@@ -98,12 +107,129 @@
         </main>
 
         <footer class="footer">
-            <p>© Mtvy · Crafted.</p>
-            <span><img src="https://profile-counter.glitch.me/mtvy-site/count.svg" alt="visitor counter"></span>
+            <p data-l10n="footerCopy">© Mtvy · Crafted.</p>
         </footer>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
     <script src="js/index.js"></script>
+    <script>
+        (() => {
+            const translations = {
+                en: {
+                    heroEyebrow: 'Mtvy / Software engineer',
+                    heroLede: 'Building reliable Go services, curating developer communities, and keeping the toolkit transparent. Explore the data sources below for the latest CV, code, and channels.',
+                    ctaCv: 'Open CV',
+                    ctaTelegram: 'Ping in Telegram',
+                    dataSectionEyebrow: 'Data links',
+                    dataSectionTitle: 'Source files & live channels',
+                    cardDirectLabel: 'Direct line',
+                    cardDirectTitle: 'Telegram DM',
+                    cardDirectBody: 'Quick questions, collaborations, or speaking invites.',
+                    cardDirectMeta: '@mtvyp',
+                    cardCvLabel: 'CV',
+                    cardCvTitle: 'Current résumé',
+                    cardCvBody: 'PDF snapshot with recent roles, stack, and highlights.',
+                    cardCvMeta: 'Updated manually',
+                    cardCommunityLabel: 'Community',
+                    cardCommunityTitle: 'Dev crew chat',
+                    cardCommunityBody: 'Shared resources, discussions, and growth.',
+                    cardCommunityMeta: 'Telegram channel',
+                    cardGithubLabel: 'GitHub',
+                    cardGithubTitle: 'Repositories & experiments',
+                    cardGithubBody: 'Projects, notes, repositories.',
+                    cardGithubMeta: 'github.com/mtvy',
+                    footerCopy: '© Mtvy · Crafted.',
+                    langLabel: 'Language'
+                },
+                ru: {
+                    heroEyebrow: 'Mtvy / Инженер-программист',
+                    heroLede: 'Создаю надежные сервисы на Go, развиваю разработческие комьюнити и делюсь рабочими инструментами. Ниже собрал актуальные источники данных: резюме, код и каналы.',
+                    ctaCv: 'Открыть CV',
+                    ctaTelegram: 'Написать в Telegram',
+                    dataSectionEyebrow: 'Данные',
+                    dataSectionTitle: 'Исходники и активные каналы',
+                    cardDirectLabel: 'Личная связь',
+                    cardDirectTitle: 'Telegram DM',
+                    cardDirectBody: 'Быстрые вопросы, сотрудничество или приглашения.',
+                    cardDirectMeta: '@mtvyp',
+                    cardCvLabel: 'CV',
+                    cardCvTitle: 'Актуальное резюме',
+                    cardCvBody: 'PDF с последними ролями, стеком и ключевыми результатами.',
+                    cardCvMeta: 'Обновляется вручную',
+                    cardCommunityLabel: 'Комьюнити',
+                    cardCommunityTitle: 'Чат команды',
+                    cardCommunityBody: 'Общие ресурсы, обсуждения, развитие.',
+                    cardCommunityMeta: 'Канал в Telegram',
+                    cardGithubLabel: 'GitHub',
+                    cardGithubTitle: 'Репозитории и эксперименты',
+                    cardGithubBody: 'Проекты, заметки, репозитории.',
+                    cardGithubMeta: 'github.com/mtvy',
+                    footerCopy: '© Mtvy · Сделано.',
+                    langLabel: 'Язык'
+                }
+            };
+
+            const fallback = translations.en;
+            const storageKey = 'mtvy-lang';
+            const langSelect = document.getElementById('lang-select');
+
+            const getStoredLocale = () => {
+                try {
+                    return localStorage.getItem(storageKey);
+                } catch (_) {
+                    return null;
+                }
+            };
+
+            const setStoredLocale = (value) => {
+                try {
+                    localStorage.setItem(storageKey, value);
+                } catch (_) {
+                    /* ignore */
+                }
+            };
+
+            const detectLocale = () => {
+                const stored = getStoredLocale();
+                if (stored && translations[stored]) {
+                    return stored;
+                }
+                const guess = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+                return guess.startsWith('ru') ? 'ru' : 'en';
+            };
+
+            const applyLocale = (locale) => {
+                const selected = translations[locale] || fallback;
+                document.documentElement.setAttribute('lang', locale);
+
+                document.querySelectorAll('[data-l10n]').forEach((el) => {
+                    const key = el.dataset.l10n;
+                    const value = selected[key] || fallback[key];
+                    if (!value) return;
+                    el.textContent = value;
+                });
+
+                if (langSelect && langSelect.value !== locale) {
+                    langSelect.value = locale;
+                }
+            };
+
+            const initialLocale = detectLocale();
+            applyLocale(initialLocale);
+
+            if (langSelect) {
+                langSelect.value = initialLocale;
+                langSelect.addEventListener('change', (event) => {
+                    const next = event.target.value;
+                    if (!translations[next]) {
+                        return;
+                    }
+                    applyLocale(next);
+                    setStoredLocale(next);
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
