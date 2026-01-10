@@ -1,0 +1,35 @@
+{
+  "name": "mtvy.github.io",
+  "version": "1.0.0",
+  "description": "Static site server for mtvy.github.io",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtvy/mtvy.github.io.git"
+  },
+  "keywords": [
+    "static-site",
+    "express",
+    "docker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.19.0"
+  },
+  "bugs": {
+    "url": "https://github.com/mtvy/mtvy.github.io/issues"
+  },
+  "homepage": "https://github.com/mtvy/mtvy.github.io#readme",
+  "dependencies": {
+    "compression": "^1.8.1",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1"
+  }
+}
